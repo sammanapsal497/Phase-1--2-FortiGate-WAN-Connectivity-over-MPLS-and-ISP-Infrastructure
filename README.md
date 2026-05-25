@@ -18,7 +18,7 @@ This project simulates a highly available, enterprise-grade Dual-WAN infrastruct
 ### 1. Primary WAN: MPLS-BGP Provider Cloud
 Simulates a Tier-1 telecommunications provider infrastructure delivering private layer 3 transport across the core.
 * **Autonomous System:** BGP AS 65400
-* **Core Core Routing:** OSPF Area 0 provides underlying IGP reachability between provider routers.
+* **Core Routing:** OSPF Area 0 provides underlying IGP reachability between provider routers.
 - **Label Distribution:** MPLS LDP distributes core transport labels.
 - **Customer Route Exchange:** MP-BGP configured between Provider Edge (PE) routers to exchange isolated customer VPN paths privately.
 - **Nodes Involved:** Customer Edge (CE) Routers, Provider Edge (PE) Routers, and Core Provider (P) Routers.
@@ -40,7 +40,7 @@ Simulates a public internet transport layer acting as a cost-effective standby.
 To establish an automatic standby path without causing asymmetric routing or packet duplication:
 1. **Primary Path:** Traffic natively forwards through the high-performance MPLS private link.
 2. **Floating Static Route:** A backup static default route is configured on the FortiGate towards the ISP gateway with an elevated **Administrative Distance of 200**.
-3. **Failover Execution:** When the primary private circuit encounters a major link failure, the FortiGate instantly drops the primary route and injects the floating static route into the active routing table. This immediately triggers an encrypted IPsec VPN tunnel across the public internet to secure end-to-end branch communication.
+3. **Failover Execution:** When the primary private circuit encounters a major link failure, the FortiGate instantly drops the primary route and injects the floating static route into the active routing table. This immediately shifts traffic to the backup internet WAN path, ensuring seamless, continuous end-to-end branch communication.
 
 ---
 
